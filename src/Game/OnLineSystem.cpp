@@ -57,6 +57,7 @@ SOCKET OnLineSystem::getSocket() {
 }
 
 DWORD WINAPI OnLineSystem::receiverMessage(LPVOID lpParam) {
+    OnLineSystem* _Online = static_cast<OnLineSystem*>(lpParam);
     SOCKET sock = *(SOCKET*)lpParam;
     char buffer[512];
     sockaddr_in from;
@@ -100,6 +101,27 @@ DWORD WINAPI OnLineSystem::receiverMessage(LPVOID lpParam) {
             }
             
         }
+        size = std::stoi(temp);
+        Entity* exist = nullptr;
+        for (auto lName : _Online->lOtherPlayer) {
+            if (lName->username == name) {
+                exist = lName;
+            }
+        }
+
+        if (exist == nullptr) {
+            Entity e;
+            e.SetPosition(pos.x, pos.y);
+            e.Size = size;
+            e.username = name;
+            _Online->lOtherPlayer.push_back(&e);
+        }
+        else {
+            exist->SetPosition(pos.x, pos.y);
+            exist->Size = size;
+        }
+
+
 
     }
 

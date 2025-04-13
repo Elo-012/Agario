@@ -1,6 +1,8 @@
 #pragma once
 #include <string>
+#include <vector>
 #include <WinSock2.h>
+#include "Entity.h"
 
 class OnLineSystem {
 private:
@@ -9,6 +11,8 @@ private:
     WSAData wsadata;
     SOCKET clientSocket;
     sockaddr_in serveurAddr;
+
+    std::vector<Entity*> lOtherPlayer;
 
     int rMessage = 0;
     int sMessage = 0;
