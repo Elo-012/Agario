@@ -1,11 +1,9 @@
-#include "pch.h"
-#include "main.h"
+#include "serveurSystem.h"
 
-int main()
-{
-#ifdef _DEBUG
-	_CrtDumpMemoryLeaks();
-#endif
 
-	return 0;
+void main() {
+	serveurSystem seveur;
+	seveur.start();
+	return;
 }
+
