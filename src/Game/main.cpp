@@ -15,9 +15,15 @@ int main()
 	sf::RenderWindow window(sf::VideoMode(WINDOWWITH, WINDOWHEIGHT), "Agar IO");
 	sf::Clock clock;
 
+
 	Player player;
 	player.SetSpeed(150);
 	player.SetPosition(100, 100);
+	player.Username = "jeanGros";
+
+	OnLineSystem Connexion;
+	Connexion.ChangeName(player.Username);
+	Connexion.Connect();
 
 	std::vector<Food> Nouriture;
 	for (int i = 0; i < 5000; i++)
@@ -35,6 +41,7 @@ int main()
 	while (window.isOpen())
 	{
 		float deltaTime = clock.restart().asSeconds();
+		Connexion.Send(player.Username + ':' + std::to_string(player.GetPosition().x) + ':' + std::to_string(player.GetPosition().y) + ':' + std::to_string(player.Size));
 
 		while (window.pollEvent(event))
 		{
