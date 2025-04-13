@@ -1,12 +1,10 @@
 #pragma once
-class Food
+#include "Entity.h"
+
+class Food : public Entity
 {
 public:
 	Food();
 	~Food();
-
-	float Feedpoint;
-
-	sf::CircleShape Miam;
 };
 
