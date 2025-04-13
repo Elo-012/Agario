@@ -3,7 +3,7 @@
 #include <ws2tcpip.h>
 #include <iostream>
 
-clientSystem::clientSystem() {
+OnLineSystem::OnLineSystem() {
     error = WSAStartup(MAKEWORD(2, 2), &wsadata);
     clientSocket = socket(AF_INET, SOCK_DGRAM, IPPROTO_UDP);
 
@@ -12,16 +12,16 @@ clientSystem::clientSystem() {
     inet_pton(AF_INET, "127.0.0.1", &serveurAddr.sin_addr);
 }
 
-void clientSystem::ChangeName(std::string newName) {
+void OnLineSystem::ChangeName(std::string newName) {
     name = newName;
 }
 
-void clientSystem::Send(std::string message) {
+void OnLineSystem::Send(std::string message) {
     sendto(clientSocket, message.c_str(), message.length(), 0, (sockaddr*)&serveurAddr, sizeof(serveurAddr));
     sMessage++;
 }
 
-void clientSystem::Recive() {
+void OnLineSystem::Recive() {
     HANDLE hThread = CreateThread(
         NULL,
         0,
@@ -39,24 +39,24 @@ void clientSystem::Recive() {
     }
 }
 
-void clientSystem::Connect() {
+void OnLineSystem::Connect() {
     connect(clientSocket, (sockaddr*)&serveurAddr, sizeof(serveurAddr));
 }
 
-void clientSystem::Deconection() {
+void OnLineSystem::Deconection() {
     closesocket(clientSocket);
     WSACleanup();
 }
 
-std::string clientSystem::getName() {
+std::string OnLineSystem::getName() {
     return name;
 }
 
-SOCKET clientSystem::getSocket() {
+SOCKET OnLineSystem::getSocket() {
     return clientSocket;
 }
 
-DWORD WINAPI clientSystem::receiverMessage(LPVOID lpParam) {
+DWORD WINAPI OnLineSystem::receiverMessage(LPVOID lpParam) {
     SOCKET sock = *(SOCKET*)lpParam;
     char buffer[512];
     sockaddr_in from;

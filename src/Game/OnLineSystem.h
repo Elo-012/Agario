@@ -2,7 +2,7 @@
 #include <string>
 #include <WinSock2.h>
 
-class clientSystem {
+class OnLineSystem {
 private:
     std::string name;
 
@@ -16,7 +16,7 @@ private:
     bool error = false;
 
 public:
-    clientSystem();
+    OnLineSystem();
 
     void ChangeName(std::string newName);
     void Send(std::string message);
