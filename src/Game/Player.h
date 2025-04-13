@@ -1,6 +1,7 @@
 #pragma once
+#include "Entity.h"
 
-class Player
+class Player : public Entity
 {
 public:
 	Player();
@@ -10,16 +11,11 @@ public:
 
 	float speed;
 	
-	float defaultsize = 30; 
-	float size;
-
-	sf::CircleShape Corps;
-
-	sf::Vector2f GetPosition();
+	float defaultsize = 30;
 
 	void SetName(const char* _name);
 	void SetSpeed(float _spd);
-	void SetSize(float _siz);
+
 	void Update(float deltaTime);
 
 	bool CheckCollision(const sf::CircleShape& food);
